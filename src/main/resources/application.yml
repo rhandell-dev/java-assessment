@@ -1,3 +1,8 @@
 spring:
   application:
     name: "takehome"
+  jackson:
+    deserialization:
+      unwrap-root-value: true
+external-api:
+  url: "https://countries.trevorblades.com/graphql"
