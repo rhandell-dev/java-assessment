@@ -15,6 +15,6 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(interceptor).addPathPatterns("/continent/**");
+        registry.addInterceptor(interceptor).addPathPatterns("/country/**");
     }
 }
