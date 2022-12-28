@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,14 +19,12 @@ import com.example.takehome.dtos.response.ContinentDetailResponseDto;
 import com.example.takehome.dtos.response.CountryDetailResponseDto;
 import com.example.takehome.dtos.response.CountryItemResponseDto;
 import com.example.takehome.dtos.response.CountryResponseDto;
+import com.example.takehome.exceptions.BusinessException;
 import com.example.takehome.services.CountryService;
 import com.example.takehome.utils.ExternalApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class CountryServiceImpl implements CountryService {
 
@@ -108,8 +107,10 @@ public class CountryServiceImpl implements CountryService {
         try {
             continentDetail = callExternalApi(request,
                     ContinentDetailResponseDto.class);
-        } catch (JsonProcessingException e1) {
-            e1.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new BusinessException(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
         }
         List<String> countryList = continentDetail.getContinent().getCountries()
                 .stream().map(e -> e.getCode()).collect(Collectors.toList());
