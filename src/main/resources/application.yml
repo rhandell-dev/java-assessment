@@ -4,5 +4,18 @@ spring:
   jackson:
     deserialization:
       unwrap-root-value: true
+  jmx:
+    enabled: false
 external-api:
   url: "https://countries.trevorblades.com/graphql"
+rate-limit:
+  authenticated: 20
+  anonymous: 5
+  duration: 60
+logging:
+  level:
+    root: WARN
+  file:
+    name: app.log
+    
+    
