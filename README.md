@@ -116,7 +116,7 @@ curl -u 'user:user' http://localhost:8080/country/get?countries=US
 ```
 
 ## Rate Limit Option
-You can modify the rate limit by modifying the rate limit properties
+You can modify the rate limit by modifying the rate limit properties in application.yml
 ```
 rate-limit:
   authenticated: 20
