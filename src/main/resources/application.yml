@@ -20,6 +20,3 @@ logging:
     root: WARN
   file:
     name: app.log
-    
-    
-    
